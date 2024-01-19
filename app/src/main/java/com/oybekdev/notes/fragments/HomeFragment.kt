@@ -22,6 +22,9 @@ import com.oybekdev.notes.databinding.FragmentHomeBinding
 import com.oybekdev.notes.model.Note
 import com.oybekdev.notes.viewmodel.NoteViewModel
 
+//SearchView to search a note
+//SearchView present on action bar menu so extend menu
+//shuning uchun MenuProvider qushildi
 class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextListener, MenuProvider {
 
     private var homeBinding:FragmentHomeBinding? = null
@@ -43,6 +46,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //MenuHost class that allows you to host and keep track of MenuProviders
+        // that will supply android.view.MenuItems to the app bar.
         val menuHost:MenuHost = requireActivity()
         menuHost.addMenuProvider(this,viewLifecycleOwner,Lifecycle.State.RESUMED)
 
@@ -74,6 +79,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
             adapter = noteAdapter
         }
 
+        //getallnotes method is observed and a list of notes via note adapter
+        //is displayed on the recyclerview
         activity?.let {
             notesViewModel.getAllNotes().observe(viewLifecycleOwner){ note ->
                 noteAdapter.differ.submitList(note)
@@ -90,6 +97,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
         }
     }
 
+    //user write the query and submit it by clicking on the search button
     override fun onQueryTextSubmit(p0: String?): Boolean {
         return false
     }
@@ -101,6 +109,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
         return true
     }
 
+    //destroy when fragment is no longer in use
     override fun onDestroy() {
         super.onDestroy()
         homeBinding = null
@@ -111,7 +120,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
         menuInflater.inflate(R.menu.home_menu,menu)
 
         val menuSearch = menu.findItem(R.id.searchMenu).actionView as SearchView
-        menuSearch.isSubmitButtonEnabled = false
+        menuSearch.isSubmitButtonEnabled = false //because we don't require any submit button search
         menuSearch.setOnQueryTextListener(this)
     }
 

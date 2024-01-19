@@ -28,8 +28,10 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note),MenuProvider {
     private val binding get() = editNoteBinding!!
 
     private lateinit var notesViewModel: NoteViewModel
-    private lateinit var currentNote: Note
+    private lateinit var currentNote: Note  //data Class
 
+    //we have attach data or the argument in nav_graph that we will require
+    //edit node fragment
     private val args:EditNoteFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -83,7 +85,7 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note),MenuProvider {
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menu.clear()
-        menuInflater.inflate(R.menu.menu_add_note,menu)
+        menuInflater.inflate(R.menu.menu_edit_note,menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
