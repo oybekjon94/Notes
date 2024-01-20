@@ -2,6 +2,7 @@ package com.oybekdev.notes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import com.oybekdev.notes.database.NoteDatabase
 import com.oybekdev.notes.repository.NoteRepository
@@ -14,8 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Thread.sleep(3000)
+        installSplashScreen()
         setContentView(R.layout.activity_main)
-
         setUpViewModel()
     }
 
