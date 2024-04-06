@@ -15,6 +15,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Query
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.oybekdev.notes.MainActivity
 import com.oybekdev.notes.R
 import com.oybekdev.notes.adapter.NoteAdapter
